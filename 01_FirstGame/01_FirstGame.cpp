@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <fstream>
 using namespace std;
 
 //g for Global variable
@@ -28,6 +29,7 @@ void initalize(Object* state, int w, int h, const char* stageData);
 void Draw(const Object* state, int w, int h);
 void update(Object* state, char input, int w, int h);
 bool checkClear(const Object* state, int w, int h);
+
 
 int main()
 {
@@ -193,5 +195,4 @@ void update(Object* state, char input, int w, int h)
 	}
 
 }
-
 

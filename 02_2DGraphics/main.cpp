@@ -5,12 +5,22 @@
 using namespace std;
 using namespace GameLib;
 
+
+struct ImgFormat
+{
+	unsigned height;
+	unsigned width;
+	unsigned* buf;
+};
+
 // 게임의 데이터 읽기 위해서 쓰는 함수
 void readFile(char** buffer, int* size, const char* filename);
 // 게임의 메인 루프에 사용
 void mainLoop();
 
 void DrawCells(int x, int y, unsigned int color);
+
+
 
 void DrawCells(int x, int y, unsigned int color)
 {
@@ -208,7 +218,6 @@ void State::update(char input)
 
 void State::draw() const
 {
-
 	for (int y = 0; y < mHeight; ++y) {
 		for (int x = 0; x < mWidth; ++x) {
 			Object o = mObjects(x, y);
@@ -332,6 +341,8 @@ void mainLoop()
 		gState = 0;
 	}
 
+
+
 	if (input == 'q') {
 		Framework::instance().requestEnd();
 	}
@@ -343,4 +354,5 @@ void mainLoop()
 		return;
 	}
 }
+
 
