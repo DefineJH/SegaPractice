@@ -50,7 +50,7 @@ ImgFormat readDDS(const char* filepath)
 	{
 		for (int x = 0; x < width; x++)
 		{
-			img.buf[y * height + x] = getUnsigned(&ddsBuffer[128 + (y * height + x) * 4]);
+			img.buf[y * width + x] = getUnsigned(&ddsBuffer[128 + ( (y * width + x) * 4)]);
 		}
 	}
 
@@ -64,17 +64,15 @@ void DrawImage(ImgFormat img)
 
 	unsigned windowWidth = Framework::instance().width();
 	unsigned windowHeight = Framework::instance().height();
-	int count = 0;
+	
 	for (unsigned y = 0; y < img.height; y++)
 	{
 		for (unsigned x = 0; x < img.width	; x++)
 		{
-			count++;
-			vram[y * windowHeight + x] = img.buf[y * img.width + x];
+			vram[y * windowWidth + x] = img.buf[y * img.width + x];
 		}
 	}
 
-	cout << count;
 }
 
 
