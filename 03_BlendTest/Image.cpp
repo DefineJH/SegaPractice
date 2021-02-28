@@ -39,24 +39,20 @@ void Image::Draw(unsigned posX, unsigned posY, unsigned srcStrX, unsigned srcStr
 			unsigned* dst = &screen[(posY + y) * windowWidth + (posX + x)];
 			unsigned src = data[(y + srcStrY) * this->width + (x + srcStrX)];
 			
-			float srcA = (src & 0xff000000) >> 24;
-			float srcB = (src & 0x00ff0000) >> 16;
-			float srcG = (src & 0x0000ff00) >> 8;
-			float srcR = (src & 0x000000ff);
+			unsigned srcA = (src & 0xff000000) >> 24;
+			unsigned srcB = (src & 0x00ff0000) >> 16;
+			unsigned srcG = (src & 0x0000ff00) >> 8;
+			unsigned srcR = (src & 0x000000ff);
 
-			float dstB = (*dst & 0x00ff0000) >> 16;
-			float dstG = (*dst & 0x0000ff00) >> 8;
-			float dstR = (*dst & 0x000000ff);
+			unsigned dstB = (*dst & 0x00ff0000) >> 16;
+			unsigned dstG = (*dst & 0x0000ff00) >> 8;
+			unsigned dstR = (*dst & 0x000000ff);
 
-			float perA = srcA / 255.f;
+			unsigned r = (srcR - dstR) * srcA / 255 + dstR;
+			unsigned g = (srcG - dstG) * srcA / 255 + dstG;
+			unsigned b = (srcB - dstB) * srcA / 255 + dstB;
 
-			unsigned val = 0;
-
-			val = static_cast<unsigned>(srcR * perA + dstR * (1 - perA)) << 16;
-			val |= static_cast<unsigned>(srcG * perA + dstG * (1 - perA)) << 8;
-			val |= static_cast<unsigned>(srcB * perA + dstB * (1 - perA));
-
-			*dst = val;
+			*dst = (r << 16) | (g << 8) | b;
 		}
 	}
 }

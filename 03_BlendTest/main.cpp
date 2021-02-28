@@ -22,12 +22,23 @@ Image* img2 = 0;
 
 void MainLoop()
 {
-	file1 = new File("background.dds");
-	file2 = new File("forground.dds");
 
-
-	img1 = new Image(*file1);
-	img2 = new Image(*file2);
+	if (!file1)
+	{
+		file1 = new File("background.dds");
+	}
+	if (!file2)
+	{
+		file2 = new File("background.dds");
+	}
+	if (!img1)
+	{
+		img1 = new Image(*file1);
+	}
+	if (!img2)
+	{
+		img2 = new Image(*file2);
+	}
 
 	img1->Draw(0, 0, 0, 0, 128, 128);
 	img2->Draw(0, 0, 0, 0, 128, 128);
